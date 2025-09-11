@@ -1,0 +1,119 @@
+/* index.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Base 层：全局基础样式 ===== */
+@layer base {
+  :root {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    font-weight: 400;
+    color-scheme: light;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    /* 防止根字体被意外放大导致 rem 尺寸异常 */
+    font-size: 16px;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background-color: #fafafa;
+    color: #1f2937; /* slate-800 */
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* ---------- 止血补丁：控制 SVG 图标不会被拉满 ---------- */
+  /* 仅影响 lucide-react 的图标（它们自动带有 .lucide 类） */
+  svg.lucide {
+    width: 1.25rem;   /* = Tailwind size-5 */
+    height: 1.25rem;
+    flex: none;       /* 避免被 flex items-stretch 拉伸 */
+  }
+
+  /* 如果页面正文使用了 Tailwind Typography（.prose），
+     防止其中的 svg 被当成媒体元素铺满容器 */
+  .prose svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: inline-block;
+  }
+  /* ------------------------------------------------------ */
+}
+
+/* ===== Components 层：自定义组件类 ===== */
+@layer components {
+  /* 统一按钮样式 */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-blue-600 text-white border-blue-600 hover:bg-blue-700 focus:ring-blue-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200 focus:ring-gray-500;
+  }
+
+  .btn-outline {
+    @apply btn bg-transparent text-blue-600 border-blue-600 hover:bg-blue-50 focus:ring-blue-500;
+  }
+
+  /* 统一卡片样式 */
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-200 hover:shadow-md;
+  }
+
+  .card-header {
+    @apply px-6 py-4 border-b border-gray-100;
+  }
+
+  .card-body {
+    @apply px-6 py-4;
+  }
+
+  .card-footer {
+    @apply px-6 py-4 border-t border-gray-100 bg-gray-50;
+  }
+
+  /* 统一输入框样式 */
+  .input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200;
+  }
+
+  .input-error {
+    @apply input border-red-300 focus:ring-red-500 focus:border-red-500;
+  }
+
+  /* 状态徽章 */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-success { @apply badge bg-green-100 text-green-800; }
+  .badge-warning { @apply badge bg-yellow-100 text-yellow-800; }
+  .badge-danger  { @apply badge bg-red-100 text-red-800; }
+  .badge-info    { @apply badge bg-blue-100 text-blue-800; }
+}
+
+/* 只关闭伪元素背景（调试用，放到 index.css 最底部，试完删） */
+*::before, *::after { 
+  background: none !important; 
+  background-image: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+

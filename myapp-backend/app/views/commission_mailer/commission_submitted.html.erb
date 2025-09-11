@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .content {
+        background-color: #ffffff;
+        padding: 20px;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      .commission-details {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+      }
+      .footer {
+        text-align: center;
+        color: #6c757d;
+        font-size: 14px;
+        margin-top: 30px;
+      }
+      .highlight {
+        color: #0066cc;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>委托提交成功确认</h1>
+    </div>
+    
+    <div class="content">
+      <p>亲爱的 <span class="highlight"><%= @customer_name %></span>，</p>
+      
+      <p>感谢您提交约稿委托！我们已经成功收到您的委托申请，以下是您的委托详情：</p>
+      
+      <div class="commission-details">
+        <h3>委托信息</h3>
+        <p><strong>委托标题：</strong><%= @commission_title %></p>
+        <% if @commission_description.present? %>
+          <p><strong>详细描述：</strong></p>
+          <p><%= simple_format(@commission_description) %></p>
+        <% end %>
+        <% if @commission_budget.present? %>
+          <p><strong>预算：</strong>¥<%= number_with_delimiter(@commission_budget) %></p>
+        <% end %>
+        <% if @estimated_delivery_date.present? %>
+          <p><strong>预计交付日期：</strong><%= @estimated_delivery_date.strftime('%Y年%m月%d日') %></p>
+        <% end %>
+        <p><strong>提交时间：</strong><%= @commission.created_at.strftime('%Y年%m月%d日 %H:%M') %></p>
+      </div>
+      
+      <h3>接下来的流程</h3>
+      <ul>
+        <li>我会在 <strong>24小时内</strong> 回复您的委托申请</li>
+        <li>确认委托详情和具体要求</li>
+        <li>商定最终的交付时间和费用</li>
+        <li>开始创作并定期更新进度</li>
+      </ul>
+      
+      <p>在我更新委托状态之前，您可以自行编辑需求或是删除委托。</p>
+      
+      <p>再次感谢您的信任！</p>
+    </div>
+    
+    <div class="footer">
+      <p>此邮件由系统自动发送，请勿直接回复</p>
+      <p>如有疑问，请联系：<a href="mailto:towtyechan@gmail.com">towtyechan@gmail.com</a></p>
+    </div>
+  </body>
+</html>

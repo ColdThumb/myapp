@@ -1,0 +1,36 @@
+委托状态更新通知
+================
+
+亲爱的 <%= @customer_name %>，
+
+您的委托状态已更新，详情如下：
+
+最新状态
+--------
+状态：<%= @status_text %>
+更新时间：<%= @commission.updated_at.strftime('%Y年%m月%d日 %H:%M') %>
+
+委托信息
+--------
+委托标题：<%= @commission_title %>
+委托编号：#<%= @commission.id %>
+提交时间：<%= @commission.created_at.strftime('%Y年%m月%d日 %H:%M') %>
+
+<% case @commission.status %>
+<% when 'assigned' %>
+您的委托已经分配给专业作者，我们将尽快开始处理您的需求。
+<% when 'in_progress' %>
+您的委托正在创作中，我会定期更新进度。如有任何问题，请随时联系我。
+<% when 'completed' %>
+🎉 恭喜！您的委托已经完成。请查收相关文件，如有任何修改意见，请及时反馈。
+<% when 'cancelled' %>
+很抱歉，您的委托已被取消。如有疑问，请联系我们了解详情。
+<% end %>
+
+如果您有任何疑问，请随时回复此邮件与我联系。
+
+感谢您的耐心等待！
+
+---
+此邮件由系统自动发送，请勿直接回复
+如有疑问，请联系：towtyechan@gmail.com

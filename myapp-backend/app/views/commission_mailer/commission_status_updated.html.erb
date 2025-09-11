@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .content {
+        background-color: #ffffff;
+        padding: 20px;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      .status-update {
+        background-color: #e7f3ff;
+        padding: 15px;
+        border-left: 4px solid #0066cc;
+        margin: 15px 0;
+      }
+      .commission-info {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+      }
+      .footer {
+        text-align: center;
+        color: #6c757d;
+        font-size: 14px;
+        margin-top: 30px;
+      }
+      .highlight {
+        color: #0066cc;
+        font-weight: bold;
+      }
+      .status {
+        font-size: 18px;
+        font-weight: bold;
+        color: #0066cc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>委托状态更新通知</h1>
+    </div>
+    
+    <div class="content">
+      <p>亲爱的 <span class="highlight"><%= @customer_name %></span>，</p>
+      
+      <p>您的委托状态已更新，详情如下：</p>
+      
+      <div class="status-update">
+        <h3>最新状态</h3>
+        <p class="status"><%= @status_text %></p>
+        <p><strong>更新时间：</strong><%= @commission.updated_at.strftime('%Y年%m月%d日 %H:%M') %></p>
+      </div>
+      
+      <div class="commission-info">
+        <h3>委托信息</h3>
+        <p><strong>委托标题：</strong><%= @commission_title %></p>
+        <p><strong>委托编号：</strong>#<%= @commission.id %></p>
+        <p><strong>提交时间：</strong><%= @commission.created_at.strftime('%Y年%m月%d日 %H:%M') %></p>
+      </div>
+      
+      <% case @commission.status %>
+      <% when 'assigned' %>
+        <p>您的委托已经分配给专业作者，我们将尽快开始处理您的需求。</p>
+      <% when 'in_progress' %>
+        <p>您的委托正在创作中，我会定期更新进度。如有任何问题，请随时联系我。</p>
+      <% when 'completed' %>
+        <p>🎉 恭喜！您的委托已经完成。请查收相关文件，如有任何修改意见，请及时反馈。</p>
+      <% when 'cancelled' %>
+        <p>很抱歉，您的委托已被取消。如有疑问，请联系我们了解详情。</p>
+      <% end %>
+      
+      <p>如果您有任何疑问，请随时回复此邮件与我联系。</p>
+      
+      <p>感谢您的耐心等待！</p>
+    </div>
+    
+    <div class="footer">
+      <p>此邮件由系统自动发送，请勿直接回复</p>
+      <p>如有疑问，请联系：<a href="mailto:towtyechan@gmail.com">towtyechan@gmail.com</a></p>
+    </div>
+  </body>
+</html>

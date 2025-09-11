@@ -1,0 +1,36 @@
+委托提交成功确认
+==================
+
+亲爱的 <%= @customer_name %>，
+
+感谢您提交约稿委托！我们已经成功收到您的委托申请，以下是您的委托详情：
+
+委托信息
+--------
+委托标题：<%= @commission_title %>
+<% if @commission_description.present? %>
+详细描述：
+<%= @commission_description %>
+<% end %>
+<% if @commission_budget.present? %>
+预算：¥<%= number_with_delimiter(@commission_budget) %>
+<% end %>
+<% if @estimated_delivery_date.present? %>
+预计交付日期：<%= @estimated_delivery_date.strftime('%Y年%m月%d日') %>
+<% end %>
+提交时间：<%= @commission.created_at.strftime('%Y年%m月%d日 %H:%M') %>
+
+接下来的流程
+------------
+• 我会在 24小时内 回复您的委托申请
+• 确认委托详情和具体要求
+• 商定最终的交付时间和费用
+• 开始创作并定期更新进度
+
+在我更新委托状态之前，您可以自行编辑需求或是删除委托。
+
+再次感谢您的信任！
+
+---
+此邮件由系统自动发送，请勿直接回复
+如有疑问，请联系：towtyechan@gmail.com
